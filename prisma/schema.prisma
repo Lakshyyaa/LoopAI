@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Note {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String?
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // as mongodb needs all models to have only small leters and plural
+  // automatically updates the timestamp whenever we update this Note
+  @@map("notes")
+}
+
+model Mail {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  subject    String
+  body       String
+  from       String
+  userId     String
+  ReceivedAt String 
+
+  // as mongodb needs all models to have only small leters and plural
+  // automatically updates the timestamp whenever we update this Note
+  @@map("mails")
+}
