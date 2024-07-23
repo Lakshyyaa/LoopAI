@@ -94,4 +94,6 @@ LoopAI is built with a robust and modern tech stack:
 This stack ensures a scalable, maintainable, and high-performance application capable of handling complex AI-driven tasks and multi-account email management.
 
 
-Made with ❤️ by [Your Name/Team Name]
+Made with ❤️ by Lakshya Singh
+
+[![https://x.com/Lakshyaa_22](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/your_twitter_handle)
