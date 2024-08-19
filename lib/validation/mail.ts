@@ -4,7 +4,8 @@ const Mail = z.object({
   body: z.string(),
   from: z.string(),
   userId: z.string(),
-  ReceivedAt: z.string()
+  ReceivedAt: z.string(),
+  Category: z.string().array(),
 });
 
 type MailType = z.infer<typeof Mail>;

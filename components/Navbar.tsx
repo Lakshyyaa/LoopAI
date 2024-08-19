@@ -4,14 +4,13 @@ import Link from "next/link";
 import LoopLogo from "../public/LoopLogoFinal.png";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { Mail, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { AddNote } from "./AddNote";
 import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 import { AiChatButton } from "./AIChatButton";
-import { Loadingbutton } from "./ui/loadingbutton";
 import { SyncMailButton } from "./SyncMailButton";
 export const NavBar = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -27,7 +26,6 @@ export const NavBar = () => {
           <span className="flex items-center gap-2">
             <SignedIn>
               <UserButton
-                afterSignOutUrl="/"
                 appearance={{
                   baseTheme: theme === "dark" ? dark : undefined,
                   // done to have userbutton resort to default(light theme)
@@ -41,9 +39,9 @@ export const NavBar = () => {
               />
             </SignedIn>
             <ThemeToggle />
-            <SyncMailButton/>
+            <SyncMailButton />
             <Button onClick={() => setShowDialog(true)}>
-              <PlusIcon />
+              <PlusIcon className="mr-2" />
               Add Note
             </Button>
             <AiChatButton />

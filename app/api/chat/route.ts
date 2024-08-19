@@ -42,12 +42,6 @@ export const POST = async (req: Request) => {
         },
       },
     });
-    // const systemMessage =
-    //   "You are an intelligent note-taking app. You answer the user's question based on their existing notes. " +
-    //   "The relevant notes for this query are:\n" +
-    // relevantNotes
-    //   .map((note) => `Title: ${note.title}\n\nContent:\n${note.content}`)
-    //   .join("\n\n");
     const systemMessage =
       "You are an intelligent app that can take notes from the user and also has access to user's work email inbox. You answer the user's question based on their existing emails and notes the user has written. " +
       "The relevant emails and notes for this query are:\n" +

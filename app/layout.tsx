@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Loop AI",
-  description: "AI Companion that talks to your inbox",
+  description: "AI Companion that talks to your mail inbox",
 };
 
 export default function RootLayout({
@@ -19,7 +19,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
+          {/* <FilterProvider> */}
           <ThemeProvider attribute="class">{children}</ThemeProvider>
+          {/* </FilterProvider> */}
         </body>
       </html>
     </ClerkProvider>

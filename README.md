@@ -1,8 +1,8 @@
-# LoopAI: Your Intelligent Note-Taking Assistant
+# LoopAI: Your Intelligent Work Assistant
 
 ![LoopAI Logo](public/LoopLogoFinal.png)
 
-LoopAI is a cutting-edge note-taking application that leverages artificial intelligence to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities, LoopAI acts as an intelligent chatbot, helping you manage your notes and emails effortlessly.
+LoopAI is a personalized cutting-edge taking application that leverages artificial intelligence to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities to talk to your notes, LoopAI acts as an intelligent chatbot, helping you manage your notes and emails effortlessly.
 
 ## Features
 
@@ -10,6 +10,7 @@ LoopAI is a cutting-edge note-taking application that leverages artificial intel
 - 📧 **Multi-Inbox Gmail Integration**: Sync and manage multiple Gmail inboxes within the app.
 - 📝 **Smart Note-Taking**: Organize and retrieve your notes with ease.
 - 🔍 **Intelligent Search**: Find exactly what you need across notes and emails.
+- 🔝 **Priority-Based Email**: Sorting: Sort your emails by priority to focus on what's most important first.
 - 🎨 **Beautiful UI**: Enjoy a sleek, intuitive interface designed for productivity using shadcn UI.
 - 🧠 **Advanced AI Capabilities**: Powered by Vercel AI SDK and Claude Connect API.
 - 🔗 **Vector Embeddings**: Utilize Pinecone DB for efficient similarity search and information retrieval.
@@ -17,13 +18,10 @@ LoopAI is a cutting-edge note-taking application that leverages artificial intel
 
 ## Demo
 
-[Watch LoopAI in Action](https://youtube.com/your_demo_video)
-
-![LoopAI Demo GIF](path/to/your/demo.gif)
-
-*For a more detailed walkthrough of LoopAI's features, check out our [YouTube demo](https://youtube.com/your_demo_video).*
+[![LoopAI Demo](https://img.youtube.com/vi/b5hCgVp_Ek8/0.jpg)](https://www.youtube.com/watch?v=b5hCgVp_Ek8)
 
 ## Getting Started
+
 
 ### Prerequisites
 
@@ -96,4 +94,4 @@ This stack ensures a scalable, maintainable, and high-performance application ca
 
 Made with ❤️ by Lakshya Singh
 
-[![https://x.com/Lakshyaa_22](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/your_twitter_handle)
+[![https://x.com/Lakshyaa_22](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://x.com/Lakshyaa_22)

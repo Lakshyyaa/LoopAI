@@ -32,7 +32,8 @@ model Mail {
   body       String
   from       String
   userId     String
-  ReceivedAt String 
+  ReceivedAt String
+  Category   String[]
 
   // as mongodb needs all models to have only small leters and plural
   // automatically updates the timestamp whenever we update this Note

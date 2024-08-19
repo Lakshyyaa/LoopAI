@@ -1,7 +1,7 @@
 import { SignUp } from "@clerk/nextjs";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "note-gpt - signup",
+  title: "LoopAI - signup",
 };
 const signup = () => {
   return (

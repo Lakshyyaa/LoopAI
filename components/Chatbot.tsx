@@ -55,14 +55,6 @@ export const AiChatBox = ({ open, onClose }: AIChatProps) => {
               message={{ role: "assistant", content: "Thinking..." }}
             />
           )}
-          {/* {error && (
-            <ChatMessage
-              message={{
-                role: "assistant",
-                content: "Something is wrong. Try again",
-              }}
-            />
-          )} */}
           {!error && messages.length === 0 && (
             <div className="flex h-full items-center justify-center gap-3">
               <Bot />
