@@ -2,7 +2,7 @@
 
 ![LoopAI Logo](public/LoopLogoFinal.png)
 
-LoopAI is a personalized cutting-edge taking application that leverages artificial intelligence to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities to talk to your notes, LoopAI acts as an intelligent chatbot, helping you manage your notes and emails effortlessly.
+LoopAI is a personalized cutting-edge application that leverages artificial intelligence to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities to talk to your notes, LoopAI acts as an intelligent chatbot, helping you manage your notes and emails effortlessly.
 
 ## Features
 
