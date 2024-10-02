@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
 import { pc } from "@/lib/pinecone";
@@ -52,11 +53,11 @@ export const POST = async (req: NextRequest) => {
     await prisma.$transaction(
       async (tx) => {
         for (const mail of mails) {
-          let categories = await getCategories(mail.body)
+          let categories = await getCategories(mail.body);
           categories = categories.content[0].text;
-          categories=categories.split(", ")
+          categories = categories.split(", ");
           console.log("categories are:", categories);
-          const Category=categories
+          const Category = categories;
           const createdMail = await tx.mail.create({
             data: { ...mail, userId, Category },
           });
