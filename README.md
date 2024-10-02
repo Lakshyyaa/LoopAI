@@ -2,17 +2,16 @@
 
 ![LoopAI Logo](public/LoopLogoFinal.png)
 
-LoopAI is a personalized cutting-edge application that leverages artificial intelligence to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities to talk to your notes, LoopAI acts as an intelligent chatbot, helping you manage your notes and emails effortlessly.
+LoopAI is a personalized chatbot+RAG application that leverages AI to revolutionize your personal and professional organization. By integrating seamlessly with multiple Gmail inboxes and utilizing advanced AI capabilities to talk to your notes and mails, LoopAI acts as an intelligent chatbot, helping you manage your events, tasks and deadlines effortlessly.
 
 ## Features
 
-- 🤖 **AI-Powered Chatbot**: Interact naturally with your notes and emails using Claude AI.
-- 📧 **Multi-Inbox Gmail Integration**: Sync and manage multiple Gmail inboxes within the app.
+- 🤖 **AI-Powered Chatbot**: Interact naturally with your notes and emails using Anthropic API.
+- 📧 **Multi-Inbox Gmail Integration**: Sync and manage multiple Gmail inboxes using Gmail API.
 - 📝 **Smart Note-Taking**: Organize and retrieve your notes with ease.
-- 🔍 **Intelligent Search**: Find exactly what you need across notes and emails.
 - 🔝 **Priority-Based Email**: Sorting: Sort your emails by priority to focus on what's most important first.
 - 🎨 **Beautiful UI**: Enjoy a sleek, intuitive interface designed for productivity using shadcn UI.
-- 🧠 **Advanced AI Capabilities**: Powered by Vercel AI SDK and Claude Connect API.
+- 🧠 **Advanced AI Capabilities**: Powered by Vercel AI SDK and Claude 3.5 Sonnet API.
 - 🔗 **Vector Embeddings**: Utilize Pinecone DB for efficient similarity search and information retrieval.
 - 🔐 **Secure User Management**: Robust authentication and session management with Clerk.js.
 
@@ -20,38 +19,6 @@ LoopAI is a personalized cutting-edge application that leverages artificial inte
 
 [![LoopAI Demo](https://img.youtube.com/vi/b5hCgVp_Ek8/0.jpg)](https://www.youtube.com/watch?v=b5hCgVp_Ek8)
 
-## Getting Started
-
-
-### Prerequisites
-
-- Node.js (v14 or later)
-- npm or yarn
-- Gmail account(s)
-- MongoDB database
-- Claude API key
-- Pinecone API key
-- Clerk.js account
-
-### Installation
-
-1. Clone the repository:
-2. Navigate to the project directory:
-3. Install dependencies:
-or
-4. Set up environment variables:
-Create a `.env.local` file in the root directory and add your configuration:
-DATABASE_URL=your_mongodb_connection_string
-NEXT_PUBLIC_GMAIL_CLIENT_ID=your_gmail_client_id
-NEXT_PUBLIC_GMAIL_CLIENT_SECRET=your_gmail_client_secret
-CLAUDE_API_KEY=your_claude_api_key
-PINECONE_API_KEY=your_pinecone_api_key
-PINECONE_ENVIRONMENT=your_pinecone_environment
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-CLERK_SECRET_KEY=your_clerk_secret_key
-5. Run the development server:
-or
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
 ## Usage
 
@@ -67,29 +34,12 @@ or
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vercel AI SDK](https://sdk.vercel.ai/)
-- [Claude Connect API](https://www.anthropic.com)
+- [Claude API](https://www.anthropic.com)
 - [Prisma](https://www.prisma.io/)
 - [MongoDB](https://www.mongodb.com/)
 - [Pinecone](https://www.pinecone.io/)
 - [Clerk](https://clerk.dev/)
 - [shadcn UI](https://ui.shadcn.com/)
-
-## Technical Stack
-
-LoopAI is built with a robust and modern tech stack:
-
-- **Frontend**: Next.js with React and TypeScript for a type-safe, performant user interface.
-- **UI Components**: shadcn UI for beautifully designed, accessible components.
-- **Backend**: Next.js API routes with TypeScript for server-side logic.
-- **Database**: MongoDB with Prisma ORM for efficient data management and type-safe database queries.
-- **Authentication**: Clerk.js for secure, feature-rich user management and authentication.
-- **AI and Data Processing**:
-- Vercel AI SDK for integrating AI capabilities.
-- Claude Connect API for advanced natural language processing.
-- Pinecone DB for storing and querying vector embeddings.
-- **Email Integration**: Custom Gmail API integration for syncing multiple inboxes.
-
-This stack ensures a scalable, maintainable, and high-performance application capable of handling complex AI-driven tasks and multi-account email management.
 
 
 Made with ❤️ by Lakshya Singh
