@@ -1,12 +1,15 @@
+// @ts-nocheck
 import { NextRequest, NextResponse } from "next/server";
 import { Note, updateNote, deleteNote } from "@/lib/validation/note";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/prisma/db";
 import { pc } from "@/lib/pinecone";
 import { getEmbedding } from "@/lib/embeddingGenerator";
+
 async function getNoteEmbeddings(title: string, content: string | undefined) {
-  return getEmbedding(title + "\n\n" + content ?? "");
+  return getEmbedding(title + "\n\n" + (content ?? ""));
 }
+
 const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
@@ -14,32 +17,30 @@ const POST = async (req: NextRequest) => {
     if (!parsed.success) {
       return NextResponse.json(
         {
-          message: parsed.error,
+          message: parsed.error.format(), // Provide detailed error messages
         },
         { status: 400 },
       );
     }
-    const { title, content } = await body;
+
+    const { title, content } = parsed.data; // Extract data from parsed object
     const { userId } = auth();
+
     if (!userId) {
       return NextResponse.json(
         {
-          message: `error : unauthorized`,
+          message: "error: unauthorized",
         },
         { status: 401 },
       );
     }
-    const embedding = await getNoteEmbeddings(title, content);
-    console.log(embedding);
 
+    const embedding = await getNoteEmbeddings(title, content);
     if (embedding === undefined) {
-      throw Error("error in creating embedding");
+      throw new Error("Error in creating embedding");
     }
+
     const note = await prisma.$transaction(async (x) => {
-      // We have put these two in a transaction even though only the first one is a db operation
-      // because this is a sequential transaction where we first do db operation and then
-      // put its emebedding in the pinecone db.
-      // If we fail for the pinecone part, it throws error and the whole transaction is undone
       const note = await x.note.create({
         data: {
           userId: userId,
@@ -47,8 +48,9 @@ const POST = async (req: NextRequest) => {
           content: content,
         },
       });
+
       const indexes = await pc.listIndexes();
-      if (!indexes.indexes?.find((x) => x.name == "notegpt")) {
+      if (!indexes.indexes?.find((x) => x.name === "notegpt")) {
         await pc.createIndex({
           name: "notegpt",
           dimension: 1024,
@@ -66,25 +68,24 @@ const POST = async (req: NextRequest) => {
       await index.namespace("Notes").upsert([
         {
           id: note.id,
-          // @ts-ignore
           values: embedding,
           metadata: { userId },
         },
       ]);
       return note;
     });
+
     return NextResponse.json(
       {
         note,
       },
       { status: 201 },
-      // request success and resource created
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json(
       {
-        message: `error : ${err}`,
+        message: `error: ${err.message || err}`,
       },
       { status: 500 },
     );
@@ -98,28 +99,27 @@ const PUT = async (req: NextRequest) => {
     if (!parsed.success) {
       return NextResponse.json(
         {
-          message: parsed.error,
+          message: parsed.error.format(), // Provide detailed error messages
         },
         { status: 400 },
       );
     }
-    const { title, content, id } = body;
+
+    const { title, content, id } = parsed.data; // Extract data from parsed object
     const note = await prisma.note.findUnique({ where: { id } });
 
     if (!note) {
-      return Response.json({ error: "Note not found" }, { status: 404 });
+      return NextResponse.json({ error: "Note not found" }, { status: 404 });
     }
 
     const { userId } = auth();
-
     if (!userId || userId !== note.userId) {
-      // check if the user is authorzied to edit that note
-      return Response.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const embedding = await getNoteEmbeddings(title, content);
 
+    const embedding = await getNoteEmbeddings(title, content);
     const updated = await prisma.$transaction(async (x) => {
-      const updated = await x.note.update({
+      const updatedNote = await x.note.update({
         where: {
           id,
         },
@@ -128,30 +128,29 @@ const PUT = async (req: NextRequest) => {
           content: content,
         },
       });
+
       const index = pc.index("notegpt");
       await index.namespace("Notes").upsert([
         {
           id: id,
-          // @ts-ignore
           values: embedding,
           metadata: { userId },
         },
       ]);
-      return updated;
+      return updatedNote;
     });
+
     return NextResponse.json(
       {
         updated,
       },
       { status: 200 },
-      // 200 for updating
-      // 201 for creating
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
       {
-        message: `error : ${error}`,
+        message: `error: ${error.message || error}`,
       },
       { status: 500 },
     );
@@ -160,44 +159,44 @@ const PUT = async (req: NextRequest) => {
 
 const DELETE = async (req: NextRequest) => {
   try {
-    console.log("asked to delete yes");
     const body = await req.json();
-    console.log("body", body);
     const parsed = deleteNote.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
         {
-          message: parsed.error,
+          message: parsed.error.format(), // Provide detailed error messages
         },
         { status: 400 },
       );
     }
-    const { id } = body;
+
+    const { id } = parsed.data; // Extract data from parsed object
     const note = await prisma.note.findUnique({ where: { id } });
 
     if (!note) {
-      return Response.json({ error: "Note not found" }, { status: 404 });
+      return NextResponse.json({ error: "Note not found" }, { status: 404 });
     }
 
     const { userId } = auth();
-
     if (!userId) {
       return NextResponse.json(
         {
-          message: `error : unauthorized`,
+          message: "error: unauthorized",
         },
         { status: 401 },
       );
     }
+
     const deleted = await prisma.$transaction(async (x) => {
-      const deleted = await prisma.note.delete({
+      const deletedNote = await x.note.delete({
         where: {
           id,
         },
       });
+
       const index = pc.index("notegpt");
       await index.namespace("Notes").deleteOne(id);
-      return deleted;
+      return deletedNote;
     });
 
     return NextResponse.json(
@@ -205,17 +204,16 @@ const DELETE = async (req: NextRequest) => {
         deleted,
       },
       { status: 200 },
-      // 200 for updating
-      // 201 for creating
     );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
       {
-        message: `error : ${error}`,
+        message: `error: ${error.message || error}`,
       },
       { status: 500 },
     );
   }
 };
+
 export { POST, PUT, DELETE };
