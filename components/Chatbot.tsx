@@ -42,7 +42,7 @@ export const AiChatBox = ({ open, onClose }: AIChatProps) => {
         open ? "fixed" : "hidden",
       )}
     >
-      <button onClick={onClose} className="mb-1 ms-auto block">
+      <button title="close" onClick={onClose} className="mb-1 ms-auto block" type="button">
         <XCircle size={30} />
       </button>
       <div className="flex h-[600px] flex-col rounded border bg-background shadow-xl">
