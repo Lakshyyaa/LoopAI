@@ -8,7 +8,7 @@ export const ThemeToggle = () => {
     <Button
       variant="outline"
       size="icon"
-      className="rounded-full"
+      className="rounded-full" 
       onClick={() => {
         if (theme === "dark") {
           setTheme("light");

@@ -4,6 +4,7 @@ import prisma from "@/prisma/db";
 import { auth } from "@clerk/nextjs/server";
 import { convertToCoreMessages, streamText } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
+import { google } from "@ai-sdk/google";
 interface messageProps {
   content: string;
   role: string;
@@ -56,11 +57,12 @@ export const POST = async (req: Request) => {
         .join("\n\n");
 
     const response = await streamText({
-      model: anthropic("claude-3-5-sonnet-20240620"),
+      // model: anthropic("claude-3-5-sonnet-20240620"),
+      model: google("gemini-1.5-flash"),
       system: systemMessage,
       messages: convertToCoreMessages(messagesTrim),
     });
-    return response.toAIStreamResponse();
+    return response.toDataStreamResponse();
   } catch (error) {
     console.log(error);
   }

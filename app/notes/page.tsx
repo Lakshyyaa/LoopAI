@@ -1,12 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/prisma/db";
-import { Note } from "@/components/Note";
-import { Mail } from "@/components/Mail";
-import { SortBy } from "@/components/SortBy";
 import { Bull } from "./Bull";
 
 const Page = async () => {
-  const { userId } = auth();
+  const { userId } = auth(); 
   const filter = "MEETINGS";
   if (!userId) {
     throw Error("undefined user");
@@ -38,7 +35,7 @@ const Page = async () => {
           {"You don't have any notes yet or synced with gmail yet, create one"}
         </div>
       )} */}
-      <Bull notes={notes} mails={mails}/>
+      <Bull notes={notes} mails={mails} />
     </div>
   );
 };

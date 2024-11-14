@@ -5,8 +5,8 @@ import { pc } from "@/lib/pinecone";
 import { auth } from "@clerk/nextjs/server";
 import { getEmbedding } from "@/lib/embeddingGenerator";
 import { convertToCoreMessages, streamText } from "ai";
-import { anthropic } from "@/lib/anthropic";
-
+// import { anthropic } from "@/lib/anthropic";
+import { geminiText } from "@/lib/gemini";
 async function getMailEmbeddings(
   subject: string,
   body: string,
@@ -17,26 +17,28 @@ async function getMailEmbeddings(
 }
 async function getCategories(body: string) {
   // M A K E  T H E  A N T H R O P I C  C L I E N T  G L O B A L
-  const msg = await anthropic.messages.create({
-    model: "claude-3-5-sonnet-20240620",
-    max_tokens: 1000,
-    temperature: 0,
-    system:
-      "Respond only with a single line with comma separated values out the following: EDUCATION, HEALTH, FINANCE, MEETINGS, EVENTS, SUBSCRIPTIONS",
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text:
-              "Given the mail, tell its categories out of: EDUCATION, HEALTH, FINANCE, MEETINGS, EVENTS, SUBSCRIPTIONS\n" +
-              body,
-          },
-        ],
-      },
-    ],
-  });
+  // const msg = await anthropic.messages.create({
+  //   model: "claude-3-5-sonnet-20240620",
+  //   max_tokens: 1000,
+  //   temperature: 0,
+  //   system:
+  //     "Respond only with a single line with comma separated values out the following: EDUCATION, HEALTH, FINANCE, MEETINGS, EVENTS, SUBSCRIPTIONS",
+  //   messages: [
+  //     {
+  //       role: "user",
+  //       content: [
+  //         {
+  //           type: "text",
+  //           text:
+  //             "Given the mail, tell its categories out of: EDUCATION, HEALTH, FINANCE, MEETINGS, EVENTS, SUBSCRIPTIONS\n" +
+  //             body,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // });
+  // return msg;
+  const msg = await geminiText(body);
   return msg;
 }
 
@@ -54,9 +56,9 @@ export const POST = async (req: NextRequest) => {
       async (tx) => {
         for (const mail of mails) {
           let categories = await getCategories(mail.body);
-          categories = categories.content[0].text;
-          categories = categories.split(", ");
-          console.log("categories are:", categories);
+          console.log("categories are: ", categories);
+          // categories=[]
+          categories = categories.split(", ").map((x) => x.trim());
           const Category = categories;
           const createdMail = await tx.mail.create({
             data: { ...mail, userId, Category },

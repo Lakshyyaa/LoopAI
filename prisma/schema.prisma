@@ -36,6 +36,5 @@ model Mail {
   Category   String[]
 
   // as mongodb needs all models to have only small leters and plural
-  // automatically updates the timestamp whenever we update this Note
   @@map("mails")
 }
