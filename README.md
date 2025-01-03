@@ -44,4 +44,4 @@ LoopAI is a personalized chatbot+RAG application that leverages AI to revolution
 
 Made with ❤️ by Lakshya Singh
 
-[![https://x.com/Lakshyaa_22](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://x.com/Lakshyaa_22)
+[![https://x.com/Lakshyaa_22](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://x.com/lakshh113)
